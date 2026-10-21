@@ -1,0 +1,13 @@
+{
+  "name": "dj-setlist-packaging",
+  "private": true,
+  "description": "Builds the macOS (Apple Silicon) .dmg. Mac-owned (see .claude/CLAUDE.md 役割分担).",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "stage": "node build.mjs --stage-only"
+  },
+  "devDependencies": {
+    "electron-builder": "26.15.3"
+  }
+}

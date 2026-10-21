@@ -1,0 +1,7 @@
+node_modules/
+packaging/.cache/
+packaging/bin/
+packaging/stage/
+packaging/dist/
+data/
+out/

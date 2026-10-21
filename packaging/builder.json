@@ -1,0 +1,42 @@
+{
+  "appId": "com.alphablackoscar.djsetlist",
+  "productName": "DJ Setlist",
+  "directories": {
+    "app": "stage",
+    "output": "dist"
+  },
+  "asar": false,
+  "npmRebuild": false,
+  "nodeGypRebuild": false,
+  "extraResources": [
+    {
+      "from": "bin",
+      "to": "bin"
+    },
+    {
+      "from": "stage/packages/analyzer/node_modules",
+      "to": "app/packages/analyzer/node_modules"
+    }
+  ],
+  "mac": {
+    "target": [
+      {
+        "target": "dmg",
+        "arch": [
+          "arm64"
+        ]
+      }
+    ],
+    "category": "public.app-category.music",
+    "identity": "-",
+    "hardenedRuntime": false,
+    "gatekeeperAssess": false
+  },
+  "dmg": {
+    "title": "DJ Setlist"
+  },
+  "electronLanguages": [
+    "ja",
+    "en"
+  ]
+}

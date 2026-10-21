@@ -1,0 +1,27 @@
+{
+  "_comment": [
+    "canonical バケット(39) -> family(9) の粗いグループ分け。",
+    "genre_map.json とは別ファイルにしてある。genre_map.json は scripts/s1-xml-prep/build-genre-map.js が",
+    "再生成するため、そこに手を入れると次の再生成で消えるから。",
+    "",
+    "なぜ 2 段にするか:",
+    "  細かい 39 バケットは残す価値がある。Techno (Peak Time) と Deep House は BPM もエネルギーも別物で、",
+    "  潰すと solver が使える情報が減る。一方で solver が『ジャンル A と B は近いか』を見るのに",
+    "  39x39 の相性表を手で埋めるのは非現実的。だから storage は 39、solver の粒度は 9 にする。",
+    "",
+    "使い分け: DB とレポートには canonical を残す。solver のソフト制約では family を使う。"
+  ],
+  "families": {
+    "four-on-floor": ["house", "deep-house", "tech-house", "progressive-house", "future-house", "electro-house", "bass-house", "tribal-house", "afro-house", "melodic-house-techno", "groove-house", "big-room", "indie-dance"],
+    "techno": ["techno"],
+    "trance": ["trance", "psy-trance"],
+    "hard": ["hardstyle", "hardcore"],
+    "broken": ["dubstep", "drum-and-bass", "breaks", "garage-bassline"],
+    "urban": ["hip-hop", "rnb", "trap"],
+    "pop": ["pop", "dance-pop", "kpop", "dance"],
+    "world": ["latin", "reggae", "afrobeats", "disco-funk"],
+    "other": ["electronica", "other", "soundtrack", "metal", "rock", "punk"]
+  },
+  "_unmapped_policy": "families に無い canonical は 'other' として扱う。genre_map.json が更新されて新しい canonical が増えたら、ここにも追記すること（追記しなくても落ちないが、solver の粒度が粗くなる）。",
+  "_blank_policy": "canonical が空文字(BLANK)の曲は family も未定。ジャンル空欄は 32% あるため、solver は family 無しでも成立する設計にすること。"
+}

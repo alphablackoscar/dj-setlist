@@ -1,0 +1,12 @@
+{
+  "_comment": "Provisional double/half rule. S4 measures kick interval (bpm_measured) and overrides this heuristic. plan.md Stage 1.",
+  "rule": {
+    "condition": {
+      "bpm_gte": 145,
+      "genre_in": ["hip-hop", "rnb", "latin", "reggae", "__BLANK__"]
+    },
+    "action": "halve"
+  },
+  "status": "provisional",
+  "supersede_by": "bpm_measured (Stage 4, kick/onset interval analysis)"
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": [
+    "曲に付ける『文脈タグ』の定義。タグをどう扱うか（除外するのか位置を縛るのか）は",
+    "config/contexts.json が決める。ここは『どれがどのタグか』だけを決める。",
+    "",
+    "判定は regex（Artist / Name / Album / Location に対して）と genre_regex（Genre に対して）の",
+    "どちらかに当たればタグが付く（OR）。片方だけでは取りこぼす:",
+    "  - 語だけ      -> 293 曲。アイドルマスター系など 17 曲を取りこぼす",
+    "  - ジャンルだけ -> 307 曲。ジャンル空欄のラブライブ 3 曲を取りこぼす",
+    "  - 両方        -> 310 曲。実測で誤爆なし（2026-08-06、collection.xml 3961 曲で確認）",
+    "",
+    "注意: scripts/s1-xml-prep/gate1-check.js が context_tags[0].regex を参照している。",
+    "anime を先頭から動かさないこと。"
+  ],
+  "context_tags": [
+    {
+      "tag": "anime",
+      "label": "アニメ / アニソン / 声優 / ゲーム",
+      "match_fields": ["Artist", "Album", "Location", "Name"],
+      "regex": "ラブライブ|Aqours|μ's|虹ヶ咲|蓮ノ空|田村ゆかり|堀江由衣|水樹奈々|Vocaloid|初音ミク|ボカロ|パラッパ|アニメ|Anime|キャラクターソング|劇場版|M@STER VERSION|アイドルマスター|デレマス",
+      "genre_regex": "^(Soundtrack|Anime|アニメ)$",
+      "_note": "旧 solver_constraint: 'position >= 5' は contexts.json に移した。場面によって除外にも位置制約にもなるため"
+    },
+    {
+      "tag": "dj-tool",
+      "label": "ループ素材 / 録音 / DJ ツール（単体では曲として成立しない）",
+      "match_fields": ["Artist", "Album", "Location", "Name"],
+      "regex": "^rekordbox$|PIONEER DJ REC|Sample Pack|\\bacapella\\b|\\bacapela\\b|one ?shot|\\bSFX\\b",
+      "genre_regex": "^(Loop Samples|XDJ-XZ)$",
+      "_note": "rekordbox 付属の練習用ループ 8 曲と REC001 などの録音。どの場面でも除外する"
+    },
+    {
+      "tag": "transition",
+      "label": "つなぎ用（曲の途中で BPM が変わる。単体ではかけられない）",
+      "match_fields": [
+        "Artist",
+        "Album",
+        "Location",
+        "Name"
+      ],
+      "regex": "\\btransitions?\\b",
+      "_note": [
+        "2026-10-17 追加。実測 28 曲（全曲解析済み）。題名が『BOMBON - 100-125 Transition』の形で、",
+        "**from-to が題名から読める（27/28）**。読めない 1 曲は『... Wordplay Transition』。",
+        "xml_bpm / bpm_measured は当てにならない（210.04 / 65 / 85 / 180 など。片側だけか誤検出）。",
+        "**このタグは contexts.json の exclude_tags に入れない。** pool.ts が通常の選出から必ず外し、",
+        "✂ の所に自動で挿し込む用の別の束（pool.transitions）に回す。除外に回すと挿し込めなくなる。"
+      ]
+    }
+  ],
+  "genre_exclude": {
+    "_comment": "ジャンル欄に入っている非ジャンルの値。genre_map.json 側で EXCLUDE に落としてある。曲そのものは除外しない（Tik Tok (Extended Mix) のように中身は普通のクラブ曲であることがあるため）。",
+    "values": ["XDJ-XZ", "zvukoff.ru", "Tik Tok", "Main", "Loop Samples"]
+  }
+}

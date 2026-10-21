@@ -1,0 +1,42 @@
+{
+  "_comment": [
+    "セットの流れのプリセット。request の \"curve\" で選ぶ。",
+    "groove = 縦ノリ度 (0=横ノリ/ブレイク寄り, 1=4つ打ちの縦ノリ)。energy = 合成エネルギー (0-1)。",
+    "",
+    "階段状にするのが要点（plan.md S5: 3-4 曲のプラトー → 段上げ）。",
+    "1 曲ごとに単調に上げると、実際には人間の耳が差を感じないうえ、",
+    "上げ幅を使い切って後半で手詰まりになる。plateau で同じ高さを 3-4 曲続けてから段を上げる。",
+    "",
+    "from/to は 0-1。plateau はプラトー 1 段あたりの曲数。"
+  ],
+
+  "curves": {
+    "horizontal_to_vertical": {
+      "label": "横ノリ → 縦ノリ（王道の上げ）",
+      "groove": { "from": 0.15, "to": 0.90 },
+      "energy": { "from": 0.25, "to": 0.95 },
+      "plateau": 4
+    },
+    "vertical_hold": {
+      "label": "最初から縦ノリで押し切る（エネルギーだけ上げる）",
+      "groove": { "from": 0.70, "to": 0.95 },
+      "energy": { "from": 0.35, "to": 0.95 },
+      "plateau": 4
+    },
+    "wave": {
+      "label": "上げて一度落としてまた上げる（山を 2 つ作る）",
+      "groove": { "from": 0.30, "to": 0.90 },
+      "energy": { "from": 0.30, "to": 0.95 },
+      "plateau": 3,
+      "dip": { "at": 0.6, "depth": 0.25 }
+    },
+    "flat": {
+      "label": "起伏なし（制約の検証用。エネルギー目標を中央に固定する）",
+      "groove": { "from": 0.5, "to": 0.5 },
+      "energy": { "from": 0.5, "to": 0.5 },
+      "plateau": 13
+    }
+  },
+
+  "default": "horizontal_to_vertical"
+}

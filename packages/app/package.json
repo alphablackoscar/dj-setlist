@@ -1,0 +1,24 @@
+{
+  "name": "@dj-setlist/app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "セットリスト草案を作る画面。solver を子プロセスとして呼ぶだけで、音源にもネットワークにも触らない。",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "electron test/dbcount-real.js && electron test/ui-nodb.js && electron test/ui-altxml.js && electron test/ui-setlist.js && electron test/ui-minutes.js && electron test/ui-real.js && electron test/ui-smoke.js && electron test/audio-serve.js && electron test/integration.js",
+    "test:dbcount": "electron test/dbcount-real.js",
+    "test:nodb": "electron test/ui-nodb.js",
+    "test:altxml": "electron test/ui-altxml.js",
+    "test:setlist": "electron test/ui-setlist.js",
+    "test:minutes": "electron test/ui-minutes.js",
+    "test:real": "electron test/ui-real.js",
+    "shot": "electron shot.js",
+    "test:audio": "electron test/audio-serve.js",
+    "test:integration": "electron test/integration.js"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0"
+  }
+}

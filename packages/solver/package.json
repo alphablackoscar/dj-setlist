@@ -1,0 +1,15 @@
+{
+  "name": "@dj-setlist/solver",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "features.db から 13 曲のセットリスト草案を組む。音源に触らない・ネットワークを使わない・依存ゼロ。",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "solve": "node src/cli.ts",
+    "tracks": "node src/cli.ts --list"
+  },
+  "dependencies": {}
+}

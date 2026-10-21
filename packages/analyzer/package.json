@@ -1,0 +1,19 @@
+{
+  "name": "@dj-setlist/analyzer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "音源から生の特徴量を抽出して features.db に書く。Windows で実行する。",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "analyze": "node src/index.ts",
+    "check": "node src/index.ts --check"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
+    "@tensorflow/tfjs-backend-wasm": "^4.22.0",
+    "essentia.js": "^0.1.3"
+  }
+}

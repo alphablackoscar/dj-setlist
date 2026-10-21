@@ -1,0 +1,15 @@
+{
+  "name": "@dj-setlist/cuetool",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "セットリストの曲にメモリーＱ（頭/イントロ終/メイン/メイン終/アウトロ）を打った rekordbox XML を作る。音源を読む・ネットワークを使わない・依存ゼロ。",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "cue": "node src/cli.js",
+    "test": "node test/run.js"
+  },
+  "dependencies": {}
+}

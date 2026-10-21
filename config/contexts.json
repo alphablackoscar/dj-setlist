@@ -1,0 +1,44 @@
+{
+  "_comment": [
+    "場面ごとの既定。Electron の UI ではここがプリセットになり、選んだあとに",
+    "ジャンルのチェックを手で足し引きする想定。",
+    "",
+    "絞り込みは 3 段。上から順に効く:",
+    "  1. ジャンル選択（request の genres / families）  ← 主役。選ばなかったジャンルは使わない",
+    "  2. ジャンル欄が空の曲（include_untagged）        ← 全体の 34%（1338 曲）あるので別扱い",
+    "  3. 文脈タグ（exclude_tags）                      ← 1 と 2 の取りこぼしを拾う網",
+    "",
+    "なぜ 3 が要るか: ジャンルを選ぶだけでは足りない曲が実測で 3 曲ある。",
+    "ラブライブ蓮ノ空など、ジャンル欄が空のアニメ曲。空欄を含める設定のときにすり抜ける。",
+    "",
+    "exclude_genres : 選択に関わらず外す canonical ジャンル",
+    "exclude_tags   : 選択に関わらず外す文脈タグ",
+    "position_min   : 使ってよいが、この位置より前には置かない（1 始まり）"
+  ],
+
+  "contexts": {
+    "nightclub": {
+      "label": "ナイトクラブ（既定）",
+      "note": "アニソンはかけられない。soundtrack を外す（アニメ 310 曲のうち 305 曲がここ）。残り 3 曲はジャンル欄が空なので anime タグで拾う",
+      "exclude_genres": ["soundtrack"],
+      "exclude_tags": ["anime", "dj-tool"],
+      "position_min": {}
+    },
+    "anisong": {
+      "label": "アニソンイベント / オタクパーティ",
+      "note": "アニソンを使う。ただし頭からは出さず 5 曲目以降に置く（plan.md S1 の元の判断）",
+      "exclude_genres": [],
+      "exclude_tags": ["dj-tool"],
+      "position_min": { "anime": 5 }
+    },
+    "practice": {
+      "label": "練習・検証用（制限なし）",
+      "note": "プールをできるだけ広く取る。本番のセットには使わない",
+      "exclude_genres": [],
+      "exclude_tags": ["dj-tool"],
+      "position_min": {}
+    }
+  },
+
+  "default": "nightclub"
+}
